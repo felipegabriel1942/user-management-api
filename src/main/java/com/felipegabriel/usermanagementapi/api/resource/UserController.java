@@ -1,5 +1,7 @@
 package com.felipegabriel.usermanagementapi.api.resource;
 
+import java.time.LocalDateTime;
+
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
@@ -33,6 +35,7 @@ public class UserController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public UserDTO save(@RequestBody @Valid UserDTO userDTO) {
 		User user = modelMapper.map(userDTO, User.class);
+		user.setCreatedDate(LocalDateTime.now());
 		user = userService.save(user);
 		return modelMapper.map(user, UserDTO.class);
 	}
@@ -61,6 +64,7 @@ public class UserController {
 		user.setName(userDTO.getName());
 		user.setPassword(userDTO.getPassword());
 		user.setAdmin(userDTO.isAdmin());
+		user.setUpdatedDate(LocalDateTime.now());
 		
 		user = userService.update(user);
 		return modelMapper.map(user, UserDTO.class);

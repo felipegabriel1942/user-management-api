@@ -1,10 +1,10 @@
 package com.felipegabriel.usermanagementapi.api.service.impl;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.felipegabriel.usermanagementapi.api.exceptions.BusinessException;
 import com.felipegabriel.usermanagementapi.api.model.entity.User;
 import com.felipegabriel.usermanagementapi.api.model.repository.UserRepository;
 import com.felipegabriel.usermanagementapi.api.service.UserService;
@@ -19,8 +19,15 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User save(User user) {
-		user.setCreatedDate(LocalDateTime.now());
+		if (emailAlredyRegistered(user.getEmail())) {
+			throw new BusinessException("There is already a registered user with this e-mail.");
+		}
+		
 		return userRepository.save(user);
+	}
+	
+	private boolean emailAlredyRegistered(String email) {
+		return userRepository.findUserByEmail(email).isPresent();
 	}
 
 	@Override
@@ -30,21 +37,23 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User update(User user) {
-		if (user == null || user.getId() == null) {
+		if (userIsInvalid(user)) {
 			throw new IllegalArgumentException("User id can't be null.");
 		}
-		
-		user.setUpdatedDate(LocalDateTime.now());
 		
 		return userRepository.save(user);
 	}
 
 	@Override
 	public void delete(User user) {
-		if (user == null || user.getId() == null) {
+		if (userIsInvalid(user)) {
 			throw new IllegalArgumentException("User id can't be null.");
 		}
 		
 		userRepository.delete(user);
+	}
+	
+	private boolean userIsInvalid(User user) {
+		return user == null || user.getId() == null;
 	}
 }

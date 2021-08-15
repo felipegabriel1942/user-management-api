@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.felipegabriel.usermanagementapi.api.exceptions.ApiErrors;
+import com.felipegabriel.usermanagementapi.api.exceptions.BusinessException;
 
 
 @RestControllerAdvice
@@ -22,7 +23,12 @@ public class GlobalControllerExceptionHandler {
 		return new ResponseEntity<>(new ApiErrors(exception), exception.getStatus());
 	}
 	
-
+	@ExceptionHandler(BusinessException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ApiErrors handlerBusinessException(BusinessException exception) {
+		return new ApiErrors(exception);
+	}
+	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ApiErrors handleValidationExceptions(MethodArgumentNotValidException exception) {

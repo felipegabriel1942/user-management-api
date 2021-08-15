@@ -19,6 +19,10 @@ public class ApiErrors {
 		bindingResult.getAllErrors().forEach(error -> this.errors.add(error.getDefaultMessage()));
 	}
 	
+	public ApiErrors(BusinessException ex) {
+		this.errors = Arrays.asList(ex.getMessage());
+	}
+	
 	public ApiErrors(ResponseStatusException ex) {
 		this.errors = Arrays.asList(ex.getReason());
 	}
