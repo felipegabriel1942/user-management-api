@@ -29,4 +29,5 @@ public class GlobalControllerExceptionHandler {
 		BindingResult bindingResult = exception.getBindingResult();
 		return new ApiErrors(bindingResult);
 	}
+	
 }
