@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,18 +28,14 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotBlank(message = "Name is obrigatory")
 	private String name;
-	
-	@NotBlank(message = "Password is obrigatory")
+
 	private String password;
 	
-	@NotBlank(message = "Creation Date is obrigatory")
 	private LocalDateTime createdDate;
 	
 	private LocalDateTime updatedDate;
 
-	@NotBlank(message = "E-mail is obrigatory")
 	private String email;
 
 	private boolean admin;
