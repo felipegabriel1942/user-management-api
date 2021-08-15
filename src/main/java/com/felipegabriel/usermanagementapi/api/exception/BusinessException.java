@@ -1,4 +1,4 @@
-package com.felipegabriel.usermanagementapi.api.exceptions;
+package com.felipegabriel.usermanagementapi.api.exception;
 
 public class BusinessException extends RuntimeException {
 

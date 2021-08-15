@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.felipegabriel.usermanagementapi.api.exceptions.BusinessException;
+import com.felipegabriel.usermanagementapi.api.exception.BusinessException;
 import com.felipegabriel.usermanagementapi.api.model.entity.User;
 import com.felipegabriel.usermanagementapi.api.model.repository.UserRepository;
 import com.felipegabriel.usermanagementapi.api.service.UserService;

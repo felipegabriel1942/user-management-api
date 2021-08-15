@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.felipegabriel.usermanagementapi.api.exceptions.ApiErrors;
-import com.felipegabriel.usermanagementapi.api.exceptions.BusinessException;
+import com.felipegabriel.usermanagementapi.api.exception.BusinessException;
 
 
 @RestControllerAdvice

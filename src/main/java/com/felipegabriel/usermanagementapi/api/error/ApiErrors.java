@@ -1,4 +1,4 @@
-package com.felipegabriel.usermanagementapi.api.exceptions;
+package com.felipegabriel.usermanagementapi.api.error;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.server.ResponseStatusException;
+
+import com.felipegabriel.usermanagementapi.api.exception.BusinessException;
 
 import lombok.Getter;
 
