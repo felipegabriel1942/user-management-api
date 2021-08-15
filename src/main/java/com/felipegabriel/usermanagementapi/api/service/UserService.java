@@ -2,8 +2,10 @@ package com.felipegabriel.usermanagementapi.api.service;
 
 import java.util.Optional;
 
-import com.felipegabriel.usermanagementapi.api.model.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
+import com.felipegabriel.usermanagementapi.api.model.entity.User;
 
 public interface UserService {
 	
@@ -15,5 +17,5 @@ public interface UserService {
 	
 	void delete(User user);
 	
-	
+	Page<User> getUsers(Pageable pageRequest);
 }

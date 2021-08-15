@@ -2,6 +2,8 @@ package com.felipegabriel.usermanagementapi.api.service.impl;
 
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.felipegabriel.usermanagementapi.api.exceptions.BusinessException;
@@ -55,5 +57,10 @@ public class UserServiceImpl implements UserService {
 	
 	private boolean userIsInvalid(User user) {
 		return user == null || user.getId() == null;
+	}
+
+	@Override
+	public Page<User> getUsers(Pageable pageRequest) {
+		return userRepository.findAll(pageRequest);
 	}
 }

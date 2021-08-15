@@ -1,10 +1,15 @@
 package com.felipegabriel.usermanagementapi.api.resource;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -68,5 +73,18 @@ public class UserController {
 		
 		user = userService.update(user);
 		return modelMapper.map(user, UserDTO.class);
+	}
+	
+	@GetMapping("{page}/users")
+	public Page<UserDTO> getUsers(@PathVariable Integer page) {
+		PageRequest pageRequest = PageRequest.of(page, 10);
+		
+		Page<User> result = userService.getUsers(pageRequest);
+		
+		List<UserDTO> users = result.getContent().stream()
+				.map(user -> modelMapper.map(user, UserDTO.class))
+				.collect(Collectors.toList());
+		
+		return new PageImpl<>(users, pageRequest, result.getTotalElements());
 	}
 }
