@@ -70,7 +70,6 @@ public class UserController {
 		
 		user.setEmail(userDTO.getEmail());
 		user.setName(userDTO.getName());
-		user.setPassword(userDTO.getPassword());
 		user.setAdmin(userDTO.isAdmin());
 		user.setLogin(userDTO.getLogin());
 		user.setUpdatedDate(LocalDateTime.now());
