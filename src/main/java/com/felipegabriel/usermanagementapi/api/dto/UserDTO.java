@@ -16,17 +16,17 @@ public class UserDTO {
 	
 	private Integer id;
 	
-	@NotBlank(message = "Name is obrigatory")
+	@NotBlank(message = "Name is obrigatory.")
 	private String name;
 	
-	@NotBlank(message = "Password is obrigatory")
+	@NotBlank(message = "Password is obrigatory.")
 	private String password;
 	
-	@NotBlank(message = "E-mail is obrigatory")
-	@Email(message = "E-mail is not valid")
+	@NotBlank(message = "E-mail is obrigatory.")
+	@Email(message = "E-mail is not valid.")
 	private String email;
 	
-	@NotBlank(message = "Login is obrigatory")
+	@NotBlank(message = "Login is obrigatory.")
 	private String login;
 	
 	private boolean admin;

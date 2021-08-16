@@ -21,15 +21,23 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User save(User user) {
-		if (emailAlredyRegistered(user.getEmail())) {
+		if (emailAlreadyRegistered(user.getEmail())) {
 			throw new BusinessException("There is already a registered user with this e-mail.");
+		}
+		
+		if (loginAlreadyRegistered(user.getLogin())) {
+			throw new BusinessException("There is already a registered user with this login.");
 		}
 			
 		return userRepository.save(user);
 	}
 	
-	private boolean emailAlredyRegistered(String email) {
+	private boolean emailAlreadyRegistered(String email) {
 		return userRepository.findByEmail(email).isPresent();
+	}
+	
+	private boolean loginAlreadyRegistered(String login) {
+		return userRepository.findByLogin(login).isPresent();
 	}
 
 	@Override
