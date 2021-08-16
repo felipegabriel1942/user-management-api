@@ -1,5 +1,6 @@
 package com.felipegabriel.usermanagementapi.api.resource;
 
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +25,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.felipegabriel.usermanagementapi.api.dto.UserDTO;
 import com.felipegabriel.usermanagementapi.api.model.entity.User;
+import com.felipegabriel.usermanagementapi.api.security.Md5;
 import com.felipegabriel.usermanagementapi.api.service.UserService;
 
 import lombok.AllArgsConstructor;
@@ -38,9 +40,10 @@ public class UserController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public UserDTO save(@RequestBody @Valid UserDTO userDTO) {
+	public UserDTO save(@RequestBody @Valid UserDTO userDTO) throws NoSuchAlgorithmException {
 		User user = modelMapper.map(userDTO, User.class);
 		user.setCreatedDate(LocalDateTime.now());
+		user.setPassword(Md5.md5Encripter(userDTO.getPassword()));
 		user = userService.save(user);
 		return modelMapper.map(user, UserDTO.class);
 	}
@@ -69,6 +72,7 @@ public class UserController {
 		user.setName(userDTO.getName());
 		user.setPassword(userDTO.getPassword());
 		user.setAdmin(userDTO.isAdmin());
+		user.setLogin(userDTO.getLogin());
 		user.setUpdatedDate(LocalDateTime.now());
 		
 		user = userService.update(user);

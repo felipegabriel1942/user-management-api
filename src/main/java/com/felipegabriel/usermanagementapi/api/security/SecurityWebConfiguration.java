@@ -21,6 +21,8 @@ public class SecurityWebConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private UserDetailImpl userDetailImpl;
+	
+	private static final String[] PUBLIC_MATCHERS = { "/h2-console/**" };
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{

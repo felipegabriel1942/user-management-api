@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 		if (emailAlredyRegistered(user.getEmail())) {
 			throw new BusinessException("There is already a registered user with this e-mail.");
 		}
-		
+			
 		return userRepository.save(user);
 	}
 	

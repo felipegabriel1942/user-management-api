@@ -26,6 +26,9 @@ public class UserDTO {
 	@Email(message = "E-mail is not valid")
 	private String email;
 	
+	@NotBlank(message = "Login is obrigatory")
+	private String login;
+	
 	private boolean admin;
 	
 }
