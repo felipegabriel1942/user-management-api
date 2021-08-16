@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	private boolean emailAlredyRegistered(String email) {
-		return userRepository.findUserByEmail(email).isPresent();
+		return userRepository.findByEmail(email).isPresent();
 	}
 
 	@Override

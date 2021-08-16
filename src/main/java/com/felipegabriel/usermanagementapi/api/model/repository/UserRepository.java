@@ -12,5 +12,5 @@ import com.felipegabriel.usermanagementapi.api.model.entity.User;
 public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	@Query("select u from User u where u.email = ?1")
-	Optional<User> findUserByEmail(String email);
+	Optional<User> findByEmail(String email);
 }
