@@ -33,8 +33,10 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 			throws AuthenticationException, IOException, ServletException {
 		user = new ObjectMapper().readValue(request.getInputStream(), User.class);
 
-		return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(),
-				user.getPassword(), Collections.emptyList()));
+		return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(
+				user.getLogin(),
+				user.getPassword(), 
+				Collections.emptyList()));
 	}
 	
 	@Override

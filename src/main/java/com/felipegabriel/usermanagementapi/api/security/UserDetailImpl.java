@@ -20,18 +20,16 @@ public class UserDetailImpl implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) {
 		UserDetail userDetail = new UserDetail();
 
-		User user = userRepository.findByEmail(username).orElse(null);
+		User user = userRepository.findByLogin(username).orElse(null);
 
 		if (user == null) {
-			throw new UsernameNotFoundException("E-mail or password invalid.");
+			throw new UsernameNotFoundException("Login or password invalid.");
 		}
 
 		userDetail.setId(user.getId());
-		userDetail.setEmail(user.getEmail());
+		userDetail.setLogin(user.getLogin());
 		userDetail.setUserPassword(user.getPassword());
 
 		return userDetail;
-
 	}
-
 }

@@ -20,7 +20,7 @@ public class UserDetail extends User implements UserDetails{
 	
 	@Getter
 	@Setter
-	private String email;
+	private String login;
 	
 	@Getter
 	@Setter
@@ -33,7 +33,7 @@ public class UserDetail extends User implements UserDetails{
 
 	@Override
 	public String getUsername() {
-		return this.getEmail();
+		return this.getLogin();
 	}
 	
 	@Override
