@@ -1,6 +1,5 @@
 package com.felipegabriel.usermanagementapi.api.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -12,11 +11,14 @@ import com.felipegabriel.usermanagementapi.api.service.EmailService;
 @Service
 public class EmailServiceImpl implements EmailService {
 	
-	@Autowired
-	private JavaMailSender javaMailSender;
+	private final JavaMailSender javaMailSender;
 	
 	@Value("${spring.mail.username}")
 	private String from;
+	
+	private EmailServiceImpl(JavaMailSender javaMailSender) {
+		this.javaMailSender = javaMailSender;
+	}
 
 	@Override
 	public void sendEmail(EmailDTO emailDTO) {
