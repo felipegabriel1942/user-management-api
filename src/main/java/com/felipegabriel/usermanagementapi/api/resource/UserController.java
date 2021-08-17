@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,6 +41,7 @@ public class UserController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAuthority(\"admin\")")
 	public UserDTO save(@RequestBody @Valid UserDTO userDTO) throws NoSuchAlgorithmException {
 		User user = modelMapper.map(userDTO, User.class);
 		user.setCreatedDate(LocalDateTime.now());
@@ -57,6 +59,7 @@ public class UserController {
 	
 	@DeleteMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@PreAuthorize("hasAuthority(\"admin\")")
 	public void delete(@PathVariable Integer id) { 
 		User user = userService.getById(id)
 			.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found."));
@@ -64,6 +67,7 @@ public class UserController {
 	}
 	
 	@PutMapping("{id}")
+	@PreAuthorize("hasAuthority(\"admin\")")
 	public UserDTO update(@PathVariable Integer id, @RequestBody UserDTO userDTO) {
 		User user = userService.getById(id)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found."));
