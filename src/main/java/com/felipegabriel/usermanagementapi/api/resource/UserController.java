@@ -82,9 +82,21 @@ public class UserController {
 		return modelMapper.map(user, UserDTO.class);
 	}
 	
+	@PutMapping("update-password/{id}")
+	@PreAuthorize("hasAuthority(\"admin\")")
+	public UserDTO updatePassword(@PathVariable Integer id, @RequestBody UserDTO userDTO) throws NoSuchAlgorithmException {
+		User user = userService.getById(id)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found."));
+		
+		user.setPassword(Md5.md5Encripter(userDTO.getPassword()));
+		
+		user = userService.update(user);
+		return modelMapper.map(user, UserDTO.class);
+	}
+	
 	@GetMapping("{page}/users")
 	public Page<UserDTO> getUsers(@PathVariable Integer page) {
-		PageRequest pageRequest = PageRequest.of(page, 10);
+		PageRequest pageRequest = PageRequest.of(page, 5);
 		
 		Page<User> result = userService.getUsers(pageRequest);
 		
