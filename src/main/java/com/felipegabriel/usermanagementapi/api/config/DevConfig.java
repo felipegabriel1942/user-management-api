@@ -109,7 +109,6 @@ public class DevConfig {
 				.password(Md5.md5Encripter("123"))
 				.createdDate(LocalDateTime.now()).build();
 		
-		
 		Arrays.asList(user, user2, user3, user4, user5, user6, user7, user8, user9, user10, user11).forEach(userService::save);
 	}
 	

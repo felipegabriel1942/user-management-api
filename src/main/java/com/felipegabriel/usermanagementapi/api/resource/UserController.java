@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -96,7 +97,7 @@ public class UserController {
 	
 	@GetMapping("{page}/users")
 	public Page<UserDTO> getUsers(@PathVariable Integer page) {
-		PageRequest pageRequest = PageRequest.of(page, 5);
+		PageRequest pageRequest = PageRequest.of(page, 5, Sort.by("id").descending());
 		
 		Page<User> result = userService.getUsers(pageRequest);
 		
