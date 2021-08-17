@@ -12,7 +12,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class EmailDTO {
 	
-	@NotBlank(message = "Destination is obrigatory.")
 	@Email(message = "E-mail is not valid.")
 	private String destination;
 	

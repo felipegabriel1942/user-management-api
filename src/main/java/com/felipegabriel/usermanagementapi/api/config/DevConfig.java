@@ -25,7 +25,7 @@ public class DevConfig {
 				.admin(true)
 				.name("admin")
 				.login("admin")
-				.email("admin@admin.com")
+				.email("pinheiro_felipeg@yahoo.com.br")
 				.password(Md5.md5Encripter("123"))
 				.createdDate(LocalDateTime.now()).build();
 
@@ -38,10 +38,10 @@ public class DevConfig {
 				.createdDate(LocalDateTime.now()).build();
 		
 		User user3 = User.builder()
-				.admin(false)
-				.name("Noah Rogers")
-				.login("Noah Rogers")
-				.email("noah_rogers@gmail.com")
+				.admin(true)
+				.name("Felipe Gabriel")
+				.login("felipe.gabriel")
+				.email("pinheirofelipeg@gmail.com")
 				.password(Md5.md5Encripter("123"))
 				.createdDate(LocalDateTime.now()).build();
 		

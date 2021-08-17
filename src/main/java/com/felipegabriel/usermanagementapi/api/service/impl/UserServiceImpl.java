@@ -1,5 +1,6 @@
 package com.felipegabriel.usermanagementapi.api.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -70,5 +71,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Page<User> getUsers(Pageable pageRequest) {
 		return userRepository.findAll(pageRequest);
+	}
+
+	@Override
+	public List<User> getAllAdmins() {
+		return userRepository.findAllAdmins();
 	}
 }
