@@ -13,8 +13,6 @@ import com.felipegabriel.usermanagementapi.api.enums.UserRoles;
 import com.felipegabriel.usermanagementapi.api.model.entity.User;
 import com.felipegabriel.usermanagementapi.api.model.repository.UserRepository;
 
-
-
 @Repository
 public class UserDetailImpl implements UserDetailsService {
 
