@@ -27,6 +27,13 @@ A simple API for user management.
 2. User
   * Login: user
   * Password: 123 
+
+# Docker image
+
+> https://hub.docker.com/r/felipegabriel1942/user-management-api
+> Obs: Run on PORT 8080
+
+
   
     
 
