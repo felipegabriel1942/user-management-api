@@ -3,7 +3,6 @@ package com.felipegabriel.usermanagementapi.api.security;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -36,8 +35,12 @@ public class SecurityWebConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailImpl).passwordEncoder(new Md5());
+		auth.inMemoryAuthentication()
+			.withUser("admin")
+			.password("admin")
+			.roles("admin");
 	}
-	
+		
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();

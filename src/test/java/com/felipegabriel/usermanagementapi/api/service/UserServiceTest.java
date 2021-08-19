@@ -29,10 +29,10 @@ import com.felipegabriel.usermanagementapi.api.service.impl.UserServiceImpl;
 @ActiveProfiles("test")
 public class UserServiceTest {
 	
-	UserService userService;
+	private UserService userService;
 	
 	@MockBean
-	UserRepository userRepository;
+	private UserRepository userRepository;
 	
 	@BeforeEach
 	public void setUp() {

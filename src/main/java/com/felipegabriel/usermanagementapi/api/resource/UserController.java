@@ -31,10 +31,11 @@ import com.felipegabriel.usermanagementapi.api.security.Md5;
 import com.felipegabriel.usermanagementapi.api.service.UserService;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/user")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserController {
 	
 	private final UserService userService;
