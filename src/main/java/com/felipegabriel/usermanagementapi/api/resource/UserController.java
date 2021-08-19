@@ -30,11 +30,14 @@ import com.felipegabriel.usermanagementapi.api.model.entity.User;
 import com.felipegabriel.usermanagementapi.api.security.Md5;
 import com.felipegabriel.usermanagementapi.api.service.UserService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
+@Api("User API")
 public class UserController {
 	
 	private final UserService userService;
@@ -43,6 +46,7 @@ public class UserController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAuthority(\"admin\")")
+	@ApiOperation("Create a user")
 	public UserDTO save(@RequestBody @Valid UserDTO userDTO) throws NoSuchAlgorithmException {
 		User user = modelMapper.map(userDTO, User.class);
 		user.setCreatedDate(LocalDateTime.now());
@@ -52,6 +56,7 @@ public class UserController {
 	}
 	
 	@GetMapping("{id}")
+	@ApiOperation("Obtains a user by id")
 	public UserDTO getById(@PathVariable Integer id) {
 		return userService.getById(id)
 			.map(user -> modelMapper.map(user, UserDTO.class))
@@ -61,6 +66,7 @@ public class UserController {
 	@DeleteMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PreAuthorize("hasAuthority(\"admin\")")
+	@ApiOperation("Delete a user by id")
 	public void delete(@PathVariable Integer id) { 
 		User user = userService.getById(id)
 			.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found."));
@@ -69,6 +75,7 @@ public class UserController {
 	
 	@PutMapping("{id}")
 	@PreAuthorize("hasAuthority(\"admin\")")
+	@ApiOperation("Updates a user")
 	public UserDTO update(@PathVariable Integer id, @RequestBody UserDTO userDTO) {
 		User user = userService.getById(id)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found."));
@@ -85,6 +92,7 @@ public class UserController {
 	
 	@PutMapping("update-password/{id}")
 	@PreAuthorize("hasAuthority(\"admin\")")
+	@ApiOperation("Update a user's password")
 	public UserDTO updatePassword(@PathVariable Integer id, @RequestBody UserDTO userDTO) throws NoSuchAlgorithmException {
 		User user = userService.getById(id)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found."));
@@ -96,6 +104,7 @@ public class UserController {
 	}
 	
 	@GetMapping("{page}/users")
+	@ApiOperation("Find users by page")
 	public Page<UserDTO> getUsers(@PathVariable Integer page) {
 		PageRequest pageRequest = PageRequest.of(page, 10, Sort.by("id").descending());
 		

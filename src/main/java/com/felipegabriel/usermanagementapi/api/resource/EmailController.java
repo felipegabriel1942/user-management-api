@@ -14,11 +14,14 @@ import com.felipegabriel.usermanagementapi.api.dto.EmailDTO;
 import com.felipegabriel.usermanagementapi.api.service.EmailService;
 import com.felipegabriel.usermanagementapi.api.service.UserService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/email")
 @AllArgsConstructor
+@Api("Email API")
 public class EmailController {
 	
 	private final EmailService emailService;
@@ -27,6 +30,7 @@ public class EmailController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PreAuthorize("hasAuthority(\"admin\")")
+	@ApiOperation("Send email to user")
 	public void sendEmail(@RequestBody @Valid EmailDTO emailDTO) {
 		emailService.sendEmail(emailDTO);
 	}
@@ -34,6 +38,7 @@ public class EmailController {
 	@PostMapping("admins")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PreAuthorize("hasAuthority(\"admin\")")
+	@ApiOperation("Send email to all registered admins")
 	public void sendEmailToAllAdmins(@RequestBody @Valid EmailDTO emailDTO) {
 		userService.getAllAdmins().forEach(u -> {
 			emailDTO.setDestination(u.getEmail());
