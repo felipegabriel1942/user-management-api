@@ -106,6 +106,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>user-management-api</finalName>
 	</build>
 
 </project>
