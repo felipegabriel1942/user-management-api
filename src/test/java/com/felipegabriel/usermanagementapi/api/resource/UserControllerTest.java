@@ -347,7 +347,7 @@ public class UserControllerTest {
 		User user = createValidUser();
 		
 		BDDMockito.given(userService.getUsers(Mockito.any(Pageable.class)))
-			.willReturn(new PageImpl<User>(Arrays.asList(user), PageRequest.of(0, 5), 1));
+			.willReturn(new PageImpl<User>(Arrays.asList(user), PageRequest.of(0, 10), 1));
 		
 		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
 				.get(USER_API.concat("/0/users"))
@@ -358,7 +358,7 @@ public class UserControllerTest {
 			.perform(request)
 			.andExpect(MockMvcResultMatchers.jsonPath("content", Matchers.hasSize(1)))
 			.andExpect(MockMvcResultMatchers.jsonPath("totalElements").value(1))
-			.andExpect(MockMvcResultMatchers.jsonPath("pageable.pageSize").value(5))
+			.andExpect(MockMvcResultMatchers.jsonPath("pageable.pageSize").value(10))
 			.andExpect(MockMvcResultMatchers.jsonPath("pageable.pageNumber").value(0));
 	}
 	

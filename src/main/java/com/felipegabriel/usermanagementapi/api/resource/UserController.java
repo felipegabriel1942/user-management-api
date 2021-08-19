@@ -30,7 +30,6 @@ import com.felipegabriel.usermanagementapi.api.model.entity.User;
 import com.felipegabriel.usermanagementapi.api.security.Md5;
 import com.felipegabriel.usermanagementapi.api.service.UserService;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -98,7 +97,7 @@ public class UserController {
 	
 	@GetMapping("{page}/users")
 	public Page<UserDTO> getUsers(@PathVariable Integer page) {
-		PageRequest pageRequest = PageRequest.of(page, 5, Sort.by("id").descending());
+		PageRequest pageRequest = PageRequest.of(page, 10, Sort.by("id").descending());
 		
 		Page<User> result = userService.getUsers(pageRequest);
 		
