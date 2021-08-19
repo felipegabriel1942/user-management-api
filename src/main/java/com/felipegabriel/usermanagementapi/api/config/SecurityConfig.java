@@ -1,4 +1,4 @@
-package com.felipegabriel.usermanagementapi.api.security;
+package com.felipegabriel.usermanagementapi.api.config;
 
 import java.util.Arrays;
 
@@ -16,10 +16,15 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.felipegabriel.usermanagementapi.api.security.JWTAuthenticationFilter;
+import com.felipegabriel.usermanagementapi.api.security.JWTLoginFilter;
+import com.felipegabriel.usermanagementapi.api.security.Md5;
+import com.felipegabriel.usermanagementapi.api.security.UserDetailImpl;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityWebConfiguration extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private UserDetailImpl userDetailImpl;
@@ -49,6 +54,7 @@ public class SecurityWebConfiguration extends WebSecurityConfigurerAdapter {
 	    web.ignoring().antMatchers("/swagger-ui.html");
 	    web.ignoring().antMatchers("/swagger-resources/**");
 	    web.ignoring().antMatchers("/webjars/**");
+	    web.ignoring().antMatchers("/h2/**");
 	}
 		
 	@Bean

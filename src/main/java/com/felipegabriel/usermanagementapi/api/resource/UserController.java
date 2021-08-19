@@ -98,6 +98,7 @@ public class UserController {
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found."));
 		
 		user.setPassword(Md5.md5Encripter(userDTO.getPassword()));
+		user.setUpdatedDate(LocalDateTime.now());
 		
 		user = userService.update(user);
 		return modelMapper.map(user, UserDTO.class);
