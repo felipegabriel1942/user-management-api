@@ -33,7 +33,6 @@ import com.felipegabriel.usermanagementapi.api.dto.UserDTO;
 import com.felipegabriel.usermanagementapi.api.model.entity.User;
 import com.felipegabriel.usermanagementapi.api.service.UserService;
 
-
 @ExtendWith(SpringExtension.class)
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -363,7 +362,7 @@ public class UserControllerTest {
 			.andExpect(MockMvcResultMatchers.jsonPath("pageable.pageNumber").value(0));
 	}
 	
-	private  User createValidUser() {
+	private User createValidUser() {
 		return User.builder()
 				.name("test")
 				.login("login")
